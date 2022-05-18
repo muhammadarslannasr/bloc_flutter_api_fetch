@@ -20,7 +20,15 @@ class _CovidPageState extends State<CovidPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('COVID-19 List')),
+      appBar: AppBar(
+        title: Text('COVID-19 List'),
+      ),
+      floatingActionButton: new FloatingActionButton(
+        elevation: 0.0,
+        child: new Icon(Icons.add),
+        backgroundColor: new Color(0xFFE57373),
+        onPressed: () {},
+      ),
       body: _buildListCovid(),
     );
   }
