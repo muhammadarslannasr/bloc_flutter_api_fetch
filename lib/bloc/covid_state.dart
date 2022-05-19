@@ -21,6 +21,7 @@ class CovidError extends CovidState {
   const CovidError(this.message);
 }
 
+
 class IncrementValueState extends CovidState {
   int currentIndex;
 
