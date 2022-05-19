@@ -20,3 +20,9 @@ class CovidError extends CovidState {
   final String? message;
   const CovidError(this.message);
 }
+
+class IncrementValueState extends CovidState {
+  int currentIndex;
+
+  IncrementValueState({required this.currentIndex});
+}

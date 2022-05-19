@@ -23,12 +23,30 @@ class _CovidPageState extends State<CovidPage> {
       appBar: AppBar(
         title: Text('COVID-19 List'),
       ),
-      floatingActionButton: new FloatingActionButton(
-        elevation: 0.0,
-        child: new Icon(Icons.add),
-        backgroundColor: new Color(0xFFE57373),
-        onPressed: () {},
-      ),
+      floatingActionButton:
+          BlocBuilder<CovidBloc, CovidState>(builder: (context, state) {
+
+        if(state is IncrementValueState){
+          return new FloatingActionButton(
+            elevation: 0.0,
+            child: Text('${state.currentIndex}'),
+            backgroundColor: new Color(0xFFE57373),
+            onPressed: () {
+              _newsBloc.add(IncrementCountValueEvent());
+            },
+          );
+        }else{
+          return new FloatingActionButton(
+            elevation: 0.0,
+            child: Text('Try'),
+            backgroundColor: new Color(0xFFE57373),
+            onPressed: () {
+              _newsBloc.add(IncrementCountValueEvent());
+            },
+          );
+        }
+
+      }),
       body: _buildListCovid(),
     );
   }

@@ -8,21 +8,32 @@ import 'package:equatable/equatable.dart';
 part 'covid_event.dart';
 part 'covid_state.dart';
 
-class CovidBloc extends Bloc<GetCovidList, CovidState> {
+class CovidBloc extends Bloc<CovidEvent, CovidState> {
+  int currentIndex = 0;
+
   CovidBloc() : super(CovidInitial()) {
+    on<GetCovidList>((event, emit) => getCovidList(event, emit));
+    on<IncrementCountValueEvent>(
+        (event, emit) => getIncrementValue(event, emit));
+  }
+
+  Future getIncrementValue(
+      IncrementCountValueEvent event, Emitter<CovidState> emit) async {
+    emit(IncrementValueState(currentIndex: currentIndex++));
+  }
+
+  Future getCovidList(GetCovidList event, Emitter<CovidState> emit) async {
     final ApiRepository _apiRepository = ApiRepository();
 
-    on<GetCovidList>((event, emit) async {
-      try {
-        emit(CovidLoading());
-        final mList = await _apiRepository.fetchCovidList();
-        emit(CovidLoaded(mList));
-        if (mList.error != null) {
-          emit(CovidError(mList.error));
-        }
-      } on NetworkError {
-        emit(CovidError("Failed to fetch data. is your device online?"));
+    try {
+      emit(CovidLoading());
+      final mList = await _apiRepository.fetchCovidList();
+      emit(CovidLoaded(mList));
+      if (mList.error != null) {
+        emit(CovidError(mList.error));
       }
-    });
+    } on NetworkError {
+      emit(CovidError("Failed to fetch data. is your device online?"));
+    }
   }
 }
