@@ -12,28 +12,23 @@ class CovidBloc extends Bloc<CovidEvent, CovidState> {
   int currentIndex = 0;
 
   CovidBloc() : super(CovidInitial()) {
-    on<GetCovidList>((event, emit) => getCovidList(event, emit));
-    on<IncrementCountValueEvent>(
-        (event, emit) => getIncrementValue(event, emit));
-  }
+    on<CovidEvent>((event, emit) async {
+      if (event is GetCovidList) {
+        final ApiRepository _apiRepository = ApiRepository();
 
-  Future getIncrementValue(
-      IncrementCountValueEvent event, Emitter<CovidState> emit) async {
-    emit(IncrementValueState(currentIndex: currentIndex++));
-  }
-
-  Future getCovidList(GetCovidList event, Emitter<CovidState> emit) async {
-    final ApiRepository _apiRepository = ApiRepository();
-
-    try {
-      emit(CovidLoading());
-      final mList = await _apiRepository.fetchCovidList();
-      emit(CovidLoaded(mList));
-      if (mList.error != null) {
-        emit(CovidError(mList.error));
+        try {
+          emit(CovidLoading());
+          final mList = await _apiRepository.fetchCovidList();
+          emit(CovidLoaded(mList));
+          if (mList.error != null) {
+            emit(CovidError(mList.error));
+          }
+        } on NetworkError {
+          emit(CovidError("Failed to fetch data. is your device online?"));
+        }
+      } else if (event is IncrementCountValueEvent) {
+        emit(IncrementValueState(currentIndex: currentIndex++));
       }
-    } on NetworkError {
-      emit(CovidError("Failed to fetch data. is your device online?"));
-    }
+    });
   }
 }

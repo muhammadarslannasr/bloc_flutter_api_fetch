@@ -8,12 +8,12 @@ class CounterPage extends StatefulWidget {
 }
 
 class _CounterPageState extends State<CounterPage> {
-
   // final CounterBloc counterBloc = BlocProvider.of<CounterBloc>(context);
 
   @override
   Widget build(BuildContext context) {
-    final CounterBloc counterBloc = BlocProvider.of<CounterBloc>(context)..add(IncrementEvent());
+    final CounterBloc counterBloc = BlocProvider.of<CounterBloc>(context)
+      ..add(IncrementEvent());
     return Scaffold(
       appBar: AppBar(
         title: Text('Counter Bloc'),

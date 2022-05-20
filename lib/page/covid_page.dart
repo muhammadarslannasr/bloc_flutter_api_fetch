@@ -29,8 +29,8 @@ class _CovidPageState extends State<CovidPage> {
         child: new Icon(Icons.add),
         backgroundColor: new Color(0xFFE57373),
         onPressed: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => CounterPage()));
+          // Navigator.of(context)
+          //     .push(MaterialPageRoute(builder: (context) => CounterPage()));
         },
       ),
       body: _buildListCovid(),
