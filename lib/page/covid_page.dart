@@ -1,5 +1,6 @@
 import 'package:bloc_api_fetching_flutter/bloc/covid_bloc.dart';
 import 'package:bloc_api_fetching_flutter/models/covid_model.dart';
+import 'package:bloc_api_fetching_flutter/page/counter_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,30 +24,15 @@ class _CovidPageState extends State<CovidPage> {
       appBar: AppBar(
         title: Text('COVID-19 List'),
       ),
-      floatingActionButton:
-          BlocBuilder<CovidBloc, CovidState>(builder: (context, state) {
-
-        if(state is IncrementValueState){
-          return new FloatingActionButton(
-            elevation: 0.0,
-            child: Text('${state.currentIndex}'),
-            backgroundColor: new Color(0xFFE57373),
-            onPressed: () {
-              _newsBloc.add(IncrementCountValueEvent());
-            },
-          );
-        }else{
-          return new FloatingActionButton(
-            elevation: 0.0,
-            child: Text('Try'),
-            backgroundColor: new Color(0xFFE57373),
-            onPressed: () {
-              _newsBloc.add(IncrementCountValueEvent());
-            },
-          );
-        }
-
-      }),
+      floatingActionButton: FloatingActionButton(
+        elevation: 0.0,
+        child: new Icon(Icons.add),
+        backgroundColor: new Color(0xFFE57373),
+        onPressed: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => CounterPage()));
+        },
+      ),
       body: _buildListCovid(),
     );
   }
