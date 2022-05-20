@@ -1,3 +1,4 @@
+import 'package:bloc_api_fetching_flutter/bloc/counter_bloc.dart';
 import 'package:bloc_api_fetching_flutter/bloc/covid_bloc.dart';
 import 'package:bloc_api_fetching_flutter/models/covid_model.dart';
 import 'package:bloc_api_fetching_flutter/page/counter_page.dart';
@@ -20,17 +21,28 @@ class _CovidPageState extends State<CovidPage> {
 
   @override
   Widget build(BuildContext context) {
+    final CounterBloc counterBloc = BlocProvider.of<CounterBloc>(context)
+      ..add(IncrementEvent());
     return Scaffold(
       appBar: AppBar(
         title: Text('COVID-19 List'),
       ),
-      floatingActionButton: FloatingActionButton(
-        elevation: 0.0,
-        child: new Icon(Icons.add),
-        backgroundColor: new Color(0xFFE57373),
-        onPressed: () {
-          // Navigator.of(context)
-          //     .push(MaterialPageRoute(builder: (context) => CounterPage()));
+      floatingActionButton: BlocBuilder<CounterBloc, CounterState>(
+        builder: (context, state) {
+          if (state is IncrementCountState) {
+            return FloatingActionButton(
+              elevation: 0.0,
+              child: Text(state.counter.toString()),
+              backgroundColor: new Color(0xFFE57373),
+              onPressed: () {
+                // Navigator.of(context)
+                //     .push(MaterialPageRoute(builder: (context) => CounterPage()));
+                counterBloc.add(IncrementEvent());
+              },
+            );
+          }
+
+          return Container();
         },
       ),
       body: _buildListCovid(),
