@@ -27,24 +27,34 @@ class _CovidPageState extends State<CovidPage> {
       appBar: AppBar(
         title: Text('COVID-19 List'),
       ),
-      floatingActionButton: BlocBuilder<CounterBloc, CounterState>(
-        builder: (context, state) {
-          if (state is IncrementCountState) {
-            return FloatingActionButton(
-              elevation: 0.0,
-              child: Text(state.counter.toString()),
-              backgroundColor: new Color(0xFFE57373),
-              onPressed: () {
-                // Navigator.of(context)
-                //     .push(MaterialPageRoute(builder: (context) => CounterPage()));
-                counterBloc.add(IncrementEvent());
-              },
-            );
-          }
-
-          return Container();
+      floatingActionButton: FloatingActionButton(
+        elevation: 0.0,
+        child: Text('Change'),
+        backgroundColor: new Color(0xFFE57373),
+        onPressed: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => CounterPage()));
+          //counterBloc.add(IncrementEvent());
         },
       ),
+      // floatingActionButton: BlocBuilder<CounterBloc, CounterState>(
+      //   builder: (context, state) {
+      //     if (state is IncrementCountState) {
+      //       return FloatingActionButton(
+      //         elevation: 0.0,
+      //         child: Text(state.counter.toString()),
+      //         backgroundColor: new Color(0xFFE57373),
+      //         onPressed: () {
+      //           // Navigator.of(context)
+      //           //     .push(MaterialPageRoute(builder: (context) => CounterPage()));
+      //           counterBloc.add(IncrementEvent());
+      //         },
+      //       );
+      //     }
+      //
+      //     return Container();
+      //   },
+      // ),
       body: _buildListCovid(),
     );
   }
