@@ -10,7 +10,7 @@ class CounterInitial extends CounterState {
 }
 
 class IncrementCountState extends CounterState {
-  int counter;
+  final int counter;
   IncrementCountState({required this.counter});
 
   @override

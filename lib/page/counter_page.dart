@@ -12,8 +12,8 @@ class _CounterPageState extends State<CounterPage> {
 
   @override
   Widget build(BuildContext context) {
-    final CounterBloc counterBloc = BlocProvider.of<CounterBloc>(context)
-      ..add(IncrementEvent());
+    // final CounterBloc counterBloc = BlocProvider.of<CounterBloc>(context)
+    //   ..add(IncrementEvent());
     return Scaffold(
       appBar: AppBar(
         title: Text('Counter Bloc'),
@@ -44,7 +44,7 @@ class _CounterPageState extends State<CounterPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           print("click");
-          counterBloc.add(IncrementEvent());
+          //counterBloc.add(IncrementEvent());
         },
         tooltip: 'Increment',
         child: Icon(Icons.add),
