@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:bloc_api_fetching_flutter/bloc/counter_bloc.dart';
 import 'package:bloc_api_fetching_flutter/bloc/covid_bloc.dart';
 import 'package:bloc_api_fetching_flutter/models/covid_model.dart';
@@ -15,6 +17,12 @@ class _CovidPageState extends State<CovidPage> {
 
   @override
   void initState() {
+    Map<String, Map<String, dynamic>> map = {
+      'data': {'data': 'test'}
+    };
+
+    print("Response Upload Object is: ${map}");
+
     _newsBloc.add(GetCovidList());
     super.initState();
   }
