@@ -26,7 +26,6 @@ class _CovidPageState extends State<CovidPage> {
     _newsBloc.add(GetCovidList());
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     final CounterBloc counterBloc = BlocProvider.of<CounterBloc>(context)
