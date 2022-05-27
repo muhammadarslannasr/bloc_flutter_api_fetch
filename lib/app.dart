@@ -6,5 +6,9 @@ import 'package:flutter/material.dart';
 /// {@endtemplate}
 class CovidApp extends MaterialApp {
   /// {@macro counter_app}
-  CovidApp({Key? key}) : super(key: key, home: CovidPage());
+  CovidApp({Key? key})
+      : super(
+          key: key,
+          home: CovidPage(),
+        );
 }

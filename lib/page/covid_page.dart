@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:bloc_api_fetching_flutter/bloc/covid_bloc.dart';
+import 'package:bloc_api_fetching_flutter/cubit/theme_cubit.dart';
 import 'package:bloc_api_fetching_flutter/models/covid_model.dart';
 import 'package:bloc_api_fetching_flutter/page/counter_page.dart';
 import 'package:bloc_api_fetching_flutter/page/tabs_screens/tab_screen.dart';
@@ -26,11 +27,24 @@ class _CovidPageState extends State<CovidPage> {
     _newsBloc.add(GetCovidList());
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('COVID-19 List'),
+        actions: [
+          BlocBuilder<ThemeCubit, ThemeState>(
+            builder: (context, state) {
+              return Switch(
+                value: state.isDarkThemeOn,
+                onChanged: (newValue) {
+                  context.read<ThemeCubit>().toggleSwitch(newValue);
+                },
+              );
+            },
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         elevation: 0.0,
